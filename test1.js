@@ -21,7 +21,7 @@ if ($RallyContext.ViewFilter.Type == 'Iteration'){
 }
 
 
-var url = `/slm/webservice/v2.0/${config.type}?pagesize=${config.pageSize}&fetch=${config.fetch}&query=${config.query}`;
+var url = `/slm/webservice/v2.0/${config.type}?project=${$RallyContext.GlobalScope.Project._ref}&projectScopeDown=${$RallyContext.GlobalScope.ProjectScopeDown}&projectScopeUp=${$RallyContext.GlobalScope.ProjectScopeUp}&pagesize=${config.pageSize}&fetch=${config.fetch}&query=${config.query}`;
 var matrix = [];
 var xProperties = config.xAxis.split('.'),
     yProperties = config.yAxis.split('.'),
@@ -39,7 +39,7 @@ fetch(url)
         yProperties.forEach(prop => { yVal = yVal[prop] || 'None' });
         if (!matrix[xVal]){ matrix[xVal] = []; columns.push(xVal)}
         if (!matrix[yVal]){ matrix[xVal][yVal] = 0; rows.push(yVal)}
-        matrix[xVal][yVal]++;
+        matrix[xVal][yVal] = matrix[xVal][yVal] + 1;
         
     })
     console.log('matrix', matrix, columns, rows)
