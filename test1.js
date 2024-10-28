@@ -38,32 +38,30 @@ fetch(url)
         xProperties.forEach(prop => { xVal = xVal[prop] || 'None' }); //todo - what if the field is null? 
         yProperties.forEach(prop => { yVal = yVal[prop] || 'None' });
         if (!matrix[xVal]){ matrix[xVal] = []; columns.push(xVal)}
-        if (!matrix[xVal][yVal]){ matrix[xVal][yVal] = 0; rows.push(yVal)}
+        if (!matrix[xVal][yVal]){ 
+            matrix[xVal][yVal] = 0; 
+            if (!rows.contains(yVal)) {rows.push(yVal)}
+        }
         matrix[xVal][yVal]++;
         
     })
     console.log('matrix', matrix, columns, rows)
 
+    data = [];
+    rows.forEach(row => {
+        rowData = [row];
+        columns.forEach(column => {
+            rowData.push(matrix[column][row])
+        })
+        data.push(rowData);
+    })
+    console.log('data',data)
+    columns.unshift(config.yAxis)
+    const grid = new gridjs.Grid({
+        columns: columns,
+        data: data
+}).render(document.getElementById("wrapper"));
 
 });
 
-// const grid = new gridjs.Grid({
-//     columns: ['Component','BuildId','Date'],
-//     server: {
-//         url: url,
-//         then: data => {
-//             console.log('data',data)
-//         //     var ret = data.QueryResult.Results.reduce(t,d => {
-//         //     var x = d[config.xAxis] || null,
-//         //         y = d[config.yAxis] || null; 
-            
-//         //     if (!t[y]){ t[y] = {} }
-//         //     if (!t[y][x]) { t[y][x] = 0 }
-//         //     t[y][x]++;
-//         //     console.log(t)
-//         //     return t; 
 
-//         // },{})
-//         // console.log('ret',ret)
-//     }}
-// }).render(document.getElementById("wrapper"));
