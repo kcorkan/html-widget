@@ -38,8 +38,8 @@ fetch(url)
         xProperties.forEach(prop => { xVal = xVal[prop] || 'None' }); //todo - what if the field is null? 
         yProperties.forEach(prop => { yVal = yVal[prop] || 'None' });
         if (!matrix[xVal]){ matrix[xVal] = []; columns.push(xVal)}
-        if (!matrix[yVal]){ matrix[xVal][yVal] = 0; rows.push(yVal)}
-        matrix[xVal][yVal] = matrix[xVal][yVal] + 1;
+        if (!matrix[xVal][yVal]){ matrix[xVal][yVal] = 0; rows.push(yVal)}
+        matrix[xVal][yVal]++;
         
     })
     console.log('matrix', matrix, columns, rows)
