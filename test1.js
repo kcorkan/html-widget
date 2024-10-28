@@ -9,12 +9,10 @@ var config = {
     sortDirection: "Desc",
     maxRows: -1,
     query:  "(Release.Name = \"FY24-Q4 PI\")",
-    pageSize: 200,
+    pageSize: 2000,
     fetch: "Name,State,Project" 
 }
 
-// $RallyContext:Begin
-// $RallyContext:End
 if ($RallyContext.ViewFilter.Type == 'Release'){
    
 }
@@ -28,6 +26,11 @@ fetch(url)
 .then(response => {return response.json()})
 .then(queryResult => { 
     console.log('queryResult',queryResult); 
+    queryResult.QueryResult.Results.forEach(workItem => {
+        console.log('workItem', workItem.Name)
+    })
+
+
 });
 
 // const grid = new gridjs.Grid({
