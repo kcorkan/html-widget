@@ -40,7 +40,7 @@ fetch(url)
         if (!matrix[xVal]){ matrix[xVal] = []; columns.push(xVal)}
         if (!matrix[xVal][yVal]){ 
             matrix[xVal][yVal] = 0; 
-            if (!rows.contains(yVal)) {rows.push(yVal)}
+            if (!rows.includes(yVal)) {rows.push(yVal)}
         }
         matrix[xVal][yVal]++;
         
