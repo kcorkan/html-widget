@@ -1,6 +1,6 @@
 var config = {
     type: "Defect",
-    xAxis: "Severity",
+    xAxis: "State",
     yAxis: "Project.Name",
     includeBlanks: true,
     includeRowTotals: true,
