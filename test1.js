@@ -32,6 +32,7 @@ fetch(url)
 .then(queryResult => { 
     console.log('queryResult',queryResult); 
     queryResult.QueryResult.Results.forEach(workItem => {
+        console.log('workitem',workItem,xProperties,yProperties)
         var xVal = workItem, yVal = workItem;
         xProperties.forEach(prop => { xVal = xVal[prop] || 'None' }); //todo - what if the field is null? 
         yProperties.forEach(prop => { yVal = yVal[prop] || 'None' });
