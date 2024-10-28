@@ -1,7 +1,7 @@
 var config = {
     type: "Defect",
     xAxis: "Severity",
-    yAxis: "Project",
+    yAxis: "Project.Name",
     includeBlanks: true,
     includeRowTotals: true,
     includeColTotals: true,
@@ -22,13 +22,25 @@ if ($RallyContext.ViewFilter.Type == 'Iteration'){
 
 
 var url = `/slm/webservice/v2.0/${config.type}?pagesize=${config.pageSize}&fetch=${config.fetch}&query=${config.query}`;
+var matrix = [];
+var xProperties = config.xAxis.split('.'),
+    yProperties = config.yAxis.split('.'),
+    columns = [], rows=[];
+
 fetch(url)
 .then(response => {return response.json()})
 .then(queryResult => { 
     console.log('queryResult',queryResult); 
     queryResult.QueryResult.Results.forEach(workItem => {
-        console.log('workItem', workItem.Name)
+        var xVal = workItem, yVal = workItem;
+        xProperties.forEach(prop => { xVal = xVal[prop] || 'None' }); //todo - what if the field is null? 
+        yProperties.forEach(prop => { yVal = yVal[prop] || 'None' });
+        if (!matrix[xVal]){ matrix[xVal] = []; columns.push(xVal)}
+        if (!matrix[yVal]){ matrix[xVal][yVal] = 0; rows.push(yVal)}
+        matrix[xVal][yVal]++;
+        
     })
+    console.log('matrix', matrix)
 
 
 });
