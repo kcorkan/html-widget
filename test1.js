@@ -34,6 +34,7 @@ fetch(url)
     queryResult.QueryResult.Results.forEach(workItem => {
         console.log('workitem',workItem,xProperties,yProperties)
         var xVal = workItem, yVal = workItem;
+        console.log('xVal',xVal,'yVal',yVal)
         xProperties.forEach(prop => { xVal = xVal[prop] || 'None' }); //todo - what if the field is null? 
         yProperties.forEach(prop => { yVal = yVal[prop] || 'None' });
         if (!matrix[xVal]){ matrix[xVal] = []; columns.push(xVal)}
@@ -41,7 +42,7 @@ fetch(url)
         matrix[xVal][yVal]++;
         
     })
-    console.log('matrix', matrix)
+    console.log('matrix', matrix, columns, rows)
 
 
 });
